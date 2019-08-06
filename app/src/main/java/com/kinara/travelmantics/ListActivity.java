@@ -25,46 +25,12 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        FirebaseUtil.openFbReference("traveldeals");
-        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
-        mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
-        mChildListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                TextView tvDeals = (TextView) findViewById(R.id.tvDeals);
-                TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
-                tvDeals.setText(tvDeals.getText() + "\n" + td.getTitle());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mDatabaseReference.addChildEventListener(mChildListener);
-
-
-
-        /*RecyclerView rvDeals = (RecyclerView) findViewById(R.id.tvDeals_recycler);
+        RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
         final DealAdapter adapter = new DealAdapter();
         rvDeals.setAdapter(adapter);
-        LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvDeals.setLayoutManager(dealsLayoutManager);*/
+        LinearLayoutManager dealsLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvDeals.setLayoutManager(dealsLayoutManager);
     }
 }
