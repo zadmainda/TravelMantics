@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class FirebaseUtil {
     public static FirebaseDatabase mFirebaseDatabase;
-    public static DatabaseReference mdatabaseReference;
+    public static DatabaseReference mDatabaseReference;
     private static FirebaseUtil firebaseUtil;
     public static ArrayList<TravelDeal> mDeals;
 
@@ -21,7 +21,7 @@ public class FirebaseUtil {
             mFirebaseDatabase = FirebaseDatabase.getInstance();
             mDeals = new ArrayList<TravelDeal>();
         }
-        mdatabaseReference = mFirebaseDatabase.getReference().child(ref);
+        mDatabaseReference = mFirebaseDatabase.getReference().child(ref);
     }
 
 }
