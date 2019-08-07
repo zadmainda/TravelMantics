@@ -59,7 +59,7 @@ public class ListActivity extends AppCompatActivity {
                 return true;
             case R.id.logout_menu:
                 AuthUI.getInstance()
-                        .delete(this)
+                        .signOut(this)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

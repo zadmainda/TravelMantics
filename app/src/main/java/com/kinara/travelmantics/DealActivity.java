@@ -50,7 +50,7 @@ public class DealActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deal);
+        setContentView((int) R.layout.activity_deal);
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         txtTitle = (EditText) findViewById(R.id.txtTitle);
@@ -70,14 +70,14 @@ public class DealActivity extends AppCompatActivity {
         Button btnImage = findViewById(R.id.btnImage);
         btnImage.setOnClickListener(new View.OnClickListener(){
 
-
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 startActivityForResult(intent.createChooser(intent, "Insert Picture"),PICTURE_RESULT);
-               ref.putFile(imageUri).addonSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>(){
+
+               /*ref.putFile(imageUri).addonSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>(){
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         String url = taskSnapshot.getDownloadUrl().toString();
@@ -88,7 +88,7 @@ public class DealActivity extends AppCompatActivity {
                         Log.d("Name", pictureName);
                         showImage(url);
                     }
-                });
+                });*/
             }
         });
     }
@@ -160,14 +160,14 @@ public class DealActivity extends AppCompatActivity {
     }
 
     private void saveDeal(){
-       deal.setTitle(txtTitle.getText().toString());
+        deal.setTitle(txtTitle.getText().toString());
         deal.setDescription(txtDescription.getText().toString());
         deal.setPrice(txtPrice.getText().toString());
         if(deal.getId()==null) {
             mDatabaseReference.push().setValue(deal);
         }
         else{
-           mDatabaseReference.child(deal.getId()).setValue(deal);
+            mDatabaseReference.child(deal.getId()).setValue(deal);
         }
     }
 

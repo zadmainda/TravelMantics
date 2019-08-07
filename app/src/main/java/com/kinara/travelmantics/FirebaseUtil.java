@@ -47,15 +47,18 @@ public class FirebaseUtil {
             mAuthListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                     if (firebaseAuth.getCurrentUser() == null) {
                         FirebaseUtil.signIn();
                     }
+
                     else {
                         String userId = firebaseAuth.getUid();
                         checkAdmin(userId);
                     }
                     Toast.makeText(callerActivity.getBaseContext(), "Welcome Back", Toast.LENGTH_LONG).show();
                 }
+
             };
             connectStorage();
 
@@ -66,8 +69,6 @@ public class FirebaseUtil {
 
     private static void signIn(){
         List<AuthUI.IdpConfig> providers = Arrays.asList(
-                            /*new AuthUI.idpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                            new AuthUI.idpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()*/
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
@@ -84,7 +85,7 @@ public class FirebaseUtil {
 
     private static void checkAdmin(String uid){
         FirebaseUtil.isAdmin = false;
-        DatabaseReference ref = mFirebaseDatabase.getReference().child("administrator").child(uid);
+        DatabaseReference ref = mFirebaseDatabase.getReference().child("administrators").child(uid);
         ChildEventListener listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
